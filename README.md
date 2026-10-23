@@ -8,9 +8,9 @@ title: antivirus java- readme
 Implementação em Java de um jogo de tabuleiro colaborativo para dois jogadores com interface no terminal. Trabalho em grupo desenvolvido para a disciplina Paradigmas da Programação, cursada em 2026/2. 
 
 ### Membros do grupo:
-Breno Demio Padilha (bdp-q)
-Fernanda L.T.M. Domingues (fernandalouize)
-Rafaela Padilha Leitoles (rafaleitoles)
+Breno Demio Padilha ([bdp-q](https://github.com/bdp-q))
+Fernanda L.T.M. Domingues ([fernandalouize](https://github.com/fernandalouize0))
+Rafaela Padilha Leitoles ([rafaleitoles](https://github.com/rafaleitoles))
 Paola Siqueira Ceconello (PaolaCeconello)
 
 ## Funcionalidades
