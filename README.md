@@ -9,7 +9,7 @@ Implementação em Java de um jogo de tabuleiro colaborativo para dois jogadores
 
 ### Membros do grupo:
 - Breno Demio Padilha ([bdp-q](https://github.com/bdp-q))
-- Fernanda L.T.M. Domingues ([fernandalouize](https://github.com/fernandalouize0))
+- Fernanda Louize Manhães Teles Domingues ([fernandalouize](https://github.com/fernandalouize0))
 - Rafaela Padilha Leitoles ([rafaleitoles](https://github.com/rafaleitoles))
 - Paola Siqueira Ceconello (PaolaCeconello)
 
