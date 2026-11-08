@@ -16,7 +16,8 @@ public class Inimigo extends Personagem{
 
     @Override
     public void atacar(Personagem alvo){
-        int valor = Dado.rolar(1,6);
+        Dado dado = new Dado();
+        int valor = dado.rolar(1,6);
 
         if (valor % 2 == 0){
             alvo.setDef(alvo.getDef() - this.getAtk());

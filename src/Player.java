@@ -7,7 +7,7 @@ public class Player extends Personagem{
     }
 
     public Player(String nomePlayer){
-        Player(nomePlayer, 2, 6)
+        this(nomePlayer, 2, 6);
     }
 
     public String getNomePlayer(){
@@ -24,7 +24,8 @@ public class Player extends Personagem{
     }
 
     public void procurarPlayer(){
-        int valor = Dado.rolar(1,6);
+        Dado dado = new Dado();
+        int valor = dado.rolar(1,6);
 
         if (valor == 4){
             this.setDef(this.getDef() + 1);
