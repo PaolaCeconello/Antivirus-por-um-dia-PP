@@ -6,6 +6,10 @@ public class Player extends Personagem{
         this.setNomePlayer(nomePlayer);
     }
 
+    public Player(String nomePlayer){
+        Player(nomePlayer, 2, 6)
+    }
+
     public String getNomePlayer(){
         return this.nomePlayer;
     }
