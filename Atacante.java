@@ -1,5 +1,5 @@
 public interface Atacante{
 
-    public void atacar(Personagem atacado);
+    public void atacar(Personagem alvo);
 
 }
