@@ -1,45 +1,39 @@
+// comentar depois
+
 public abstract class Personagem implements Atacante{
-    private int ATK; 
-    private int DEF;
+    protected int atk; 
+    protected int def;
     // setor ainda nao foi criado
     // private Setor setorAtual; 
-    private boolean vivo;
 
     // obs: colocar o Setor aqui dps
-    public Personagem(int ATK, int DEF) {
-        setATK(ATK);
-        setDEF(DEF);
+    public Personagem(int atk, int def) {
+        this.setAtk(atk);
+        this.setDef(def);
     }
 
-    public abstract void atacar(Personagem alvo);
-
-    public int getATK(){
-        return this.ATK;
+    public int getAtk(){
+        return this.atk;
     }
 
-    public int getDEF(){
-        return this.DEF;
+    public int getDef(){
+        return this.def;
     }
 
     // colocar o getSetor aqui
 
-    public boolean getVivo(){
-        return this.vivo;
+    public boolean isVivo(){
+        return (this.def > 0);
     }
 
-    public void setATK(int ATK){
-        this.ATK = ATK;
-        return;
-    }
+    public void setAtk(int atk){
+        if (atk >= 0){
+            this.atk = atk;
 
-    public void setDEF(int DEF){
-        this.DEF = DEF;
-
-        if (DEF <= 0){
-            this.vivo = false;
-        } else {
-            this.vivo = true;
         }
-        return;
+    }
+
+    public void setDef(int def){
+        this.def = def;
     }
 }
