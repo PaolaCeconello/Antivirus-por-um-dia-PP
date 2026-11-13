@@ -7,16 +7,20 @@ public class Jogo{
     private boolean fim;            // se o jogo acabou ou nao
     private Tabuleiro tabuleiro;    // o tabuleiro do jogo
     private List<Player> players;   // a lista do jogo
-    private Scanner input;          // input do teclado que sera usado no jogo
+    private Scanner entrada;          // input do teclado que sera usado no jogo
     private Dado dado;              // dado para aleatorização
-    
+    private Renderizador renderizador; 
+    /* renderizador n deveria ser static? */
+
     public Jogo() {
         this.turno = 0;
-        this.fim = 0;
+        this.fim = false;
         this.players = new ArrayList<>();
         this.entrada = new Scanner(System.in);
+        this.dado = new Dado();
+        this.renderizador = new Renderizador();
     }
-    //aqui n tem que ser setMundo? ver slides raquel
+
     public void iniciarMundo() {
         // vai ter que criar tabuleiro, sortear a fonte da infecção
         this.tabuleiro = new Tabuleiro();
@@ -30,9 +34,11 @@ public class Jogo{
         Pos fonte = new Pos();
         fonte.setX(x);
         fonte.setY(y);
-        tabuleiro.setFonteDeInfecção(fonte);
+        tabuleiro.setFonteDeInfeccao(fonte);
         // tem que criar os players e colocar eles no centro.
         // work in progress...
+        Player p1 = new Player("P1");
+        PlayerSuporte p2 = new PlayerSuporte("P2",p1)
         this.players.add(p1);
         this.players.add(p2);
     }
@@ -40,7 +46,7 @@ public class Jogo{
     public void jogar() {
         while (!fim) {
             turno++;
-            Renderizador.renderizarTela(naoseioquevaiviraquidentro)
+            Renderizador.renderizarTela(tabuleiro, players.get(0), (PlayerSuporte) players.get(1));
             //roda o turno do p1, vem o turno do p2, turno dos inimigos, renderizações
 
             if (turno >= 25){
