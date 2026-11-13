@@ -2,17 +2,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 public abstract class Setor{
-    protected Pos coord;
-    protected boolean[] portas = new boolean [4];
-    protected boolean visitado;
-    protected List<Inimigo> inimigosNoSetor = new ArrayList<>();
+    private Pos coord;
+    private boolean[] portas;
+    private boolean visitado;
+    private List<Inimigo> inimigosNoSetor;
 
-public void gerarInimigos(){
-    for (Inimigo inimigo : inimigosNoSetor){
-        Dado dado = new Dado();
+public Setor(Pos coord, boolean[] portas){
+    this.coord = coord;
+    this.portas = portas;
+    this.visitado = false;
+    this.inimigosNoSetor = new ArrayList<>();
+} 
+
+private void gerarInimigos(){
+    Dado dado = new Dado();
+    int quantidade = dado.rolar(1,3);
+    
+    for (int i = 0; i < quantidade; i++){
         int valor = dado.rolar(1,3);
-        inimigo.setAtk(valor);
-        inimigo.setDef(valor);
+        Inimigo inimigo = new Inimigo(valor, i+1);
+        
+        inimigosNoSetor.add(inimigo);
     }
 }
 
@@ -25,7 +35,7 @@ public Pos getCoord(){
 }
 
 public void setVisitado(){
-    if (this.visitado = false)
+    if (this.visitado == false)
         this.visitado = true;
 }
 
@@ -33,11 +43,16 @@ public boolean getVisitado(){
     return this.visitado;
 }
     
-public boolean getPortas(int portas){
-    return this.portas[portas];
+public boolean getPortas(int i){
+    return this.portas[i];
 }
 
-//visitar(): void oq essa função faz???
+public void visitar(){
+    if (!this.visitado) {
+        setVisitado();
+        gerarInimigos();
+    }
+}
 
 public List<Inimigo> getInimigos(){
     return new ArrayList<>(inimigosNoSetor);
