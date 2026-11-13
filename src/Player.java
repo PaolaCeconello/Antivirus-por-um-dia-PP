@@ -25,7 +25,7 @@ public class Player extends Personagem{
 
     public void procurarPlayer(){
 
-        if (this.setorAtual == null || this.setorAtual.podeProcurar()){
+        if (this.setorAtual == null || !this.setorAtual.podeProcurar()){
             return;
         }
 
@@ -44,10 +44,14 @@ public class Player extends Personagem{
     }
 
     public void movimentarPlayer(Setor setor){
+        if (setorAtual == null){
+            return;
+        }
+        
         if (this.setorAtual.temInimigosVivos()){
             return;
         }
 
-        this.setSetorAtual(destino);
+        this.setSetorAtual(setor);
     }
 }
