@@ -39,7 +39,7 @@ public class Jogo{
 
         // cria os personagens e add eles no array
         Player p1 = new Player("P1");
-        PlayerSuporte p2 = new PlayerSuporte("P2",p1)
+        PlayerSuporte p2 = new PlayerSuporte("P2",p1);
         this.players.add(p1);
         this.players.add(p2);
     }
