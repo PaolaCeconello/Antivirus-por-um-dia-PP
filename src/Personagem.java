@@ -3,8 +3,7 @@
 public abstract class Personagem implements Atacante{
     protected int atk; 
     protected int def;
-    // setor ainda nao foi criado
-    // private Setor setorAtual; 
+    protected Setor setorAtual;
 
     // obs: colocar o Setor aqui dps
     public Personagem(int atk, int def) {
@@ -20,8 +19,14 @@ public abstract class Personagem implements Atacante{
         return this.def;
     }
 
-    // colocar o getSetor aqui
+    public Setor getSetorAtual(){
+        return this.setorAtual;
+    }
 
+    public void setSetorAtual(Setor setorAtual){
+        this.setorAtual = setorAtual;
+    }
+    
     public boolean isVivo(){
         return (this.def > 0);
     }

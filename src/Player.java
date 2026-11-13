@@ -24,6 +24,11 @@ public class Player extends Personagem{
     }
 
     public void procurarPlayer(){
+
+        if (this.setorAtual == null || this.setorAtual.podeProcurar()){
+            return;
+        }
+
         Dado dado = new Dado();
         int valor = dado.rolar(1,6);
 
@@ -32,10 +37,17 @@ public class Player extends Personagem{
         } else if (valor == 5) {
             this.setDef(this.getDef() + 2);
         } else if (valor == 6){
-            // TIRA DE VIDA TD MUNDO DO SETOR (DOS INIMIGOS )
+            for (Inimigo inimigo : this.setorAtual.getInimigos()){
+                inimigo.setDef(inimigo.getDef() - 1);
+            }
         }
     }
 
-    // depende do mundo e to setor
-    // public void movimentarPlayer(Direcao d)
+    public void movimentarPlayer(Setor setor){
+        if (this.setorAtual.temInimigosVivos()){
+            return;
+        }
+
+        this.setSetorAtual(destino);
+    }
 }
