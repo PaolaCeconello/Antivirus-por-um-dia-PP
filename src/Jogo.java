@@ -129,7 +129,7 @@ public class Jogo{
 
         int x = atual.getCoord().getX();   
         int y = atual.getCoord().getY();   
-        int porta = opcao - 1;             // 0=Norte, 1=Sul, 2=Leste, 3=Oeste ? ta certo isso ?
+        int porta = opcao;             // 0=Norte, 1=Sul, 2=Leste, 3=Oeste ? ta certo isso ?
 
         if (!atual.getPortas(porta)) {
             System.out.println("Ali é uma parede");

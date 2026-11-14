@@ -24,6 +24,9 @@ public class Renderizador {
                     Pos coord = new Pos(line, column); // Variável auxiliar
 
                     // Adiciona o número da linha à esquerda do tabuleiro
+                    if ((i == 0) && (line > 0))
+                        continue;
+
                     if (column == 0) {
                         if (i == 1)
                             linhas[(line + 1) * 2 + i - 1] += String.format("%d    |", line + 1);
@@ -33,10 +36,7 @@ public class Renderizador {
 
                     // Adiciona a primeira linha da linha 1, que não tem portas
                     if (i == 0) {
-                        if (line > 0)
-                            continue;
-                        else
-                            linhas[1] += "---|";
+                        linhas[1] += "---|";
                     }
 
                     if (i == 1) {
@@ -81,7 +81,7 @@ public class Renderizador {
         List<Inimigo> inimigos = setor.getInimigos(); // Variável auxiliar
 
         // Definição das linhas 0 e 1
-        linhas[0] = String.format("  Setor [%d,%d]  ", setor.getCoord().getX(), setor.getCoord().getY());
+        linhas[0] = String.format("  Setor [%d,%d]  ", setor.getCoord().getX() + 1, setor.getCoord().getY() + 1);
         linhas[1] = "";
 
         // Definição da linha 2. Se houver porta no NORTE, a desenha.
@@ -138,7 +138,7 @@ public class Renderizador {
             if (player2.getDef() >= 10)
                 linhas[7] += String.format("%d/%2d  |", player2.getAtk(), player2.getDef());
             else
-                linhas[7] += String.format("%d/%d   |", player2.getAtk(), player1.getDef());
+                linhas[7] += String.format("%d/%d   |", player2.getAtk(), player2.getDef());
         } else {
             linhas[6] += "      |";
             linhas[7] += "      |";
