@@ -10,8 +10,6 @@ public class Jogo{
     private Scanner entrada;            // input do teclado que sera usado no jogo
     private Renderizador renderizador;  // Renderizador da tela
     private Player vencedor;            // o Player que venceu o jogo
-    /* renderizador n deveria ser static? fiquei pensando só p nao ter que criar um atributo mas n
-    sei se faz sentido   */
 
     public Jogo() {
         this.turno = 0;
@@ -146,12 +144,6 @@ public class Jogo{
             y--;   //vai pra esquerda         
         }
         
-        //coloquei isso, mas na teoria é só garantir que todas as bordas sao paredes
-        if (x < 0 || x > 4 || y < 0 || y > 4) { 
-            System.out.println("Não dá para sair do tabuleiro");
-            return;
-        }
-
         // movimenta em si o player
         Pos destino = new Pos(x,y);
         p.movimentarPlayer(tabuleiro.getSetor(destino));
