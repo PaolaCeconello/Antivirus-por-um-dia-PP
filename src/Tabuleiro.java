@@ -1,6 +1,7 @@
 public class Tabuleiro {
     private Setor[][] matriz;
     private Pos fonteDeInfeccao;
+    
     private static  boolean[][] passagemHorizontal = {
         {true,  true,  true,  false},  
         {false, true,  true,  true},   
