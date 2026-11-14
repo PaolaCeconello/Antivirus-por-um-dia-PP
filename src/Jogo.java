@@ -22,7 +22,7 @@ public class Jogo{
         this.vencedor = null;
     }
 
-    // cria o tabuleiro, sorteia a fonte de infecção e cria os players
+    // cria o tabuleiro e cria os players
     public void iniciarMundo() {
 
         this.tabuleiro = new Tabuleiro();
@@ -44,15 +44,11 @@ public class Jogo{
     }
 
     public void jogar() {
-        int morte = 0;
         while (!fim) {
             turno++;
             for (Player p : players) {
                 if (p.isVivo() && !fim) {
                     turnoPlayer(p);
-                }
-                else{
-                    morte += 1;
                 }
             }
 
@@ -76,8 +72,8 @@ public class Jogo{
         // mostra como o jogo terminou
         if (vencedor != null) {
             System.out.println(vencedor.getNomePlayer() + " encontrou a fonte de infecção e venceu!");
-        } else if {
-            System.out.println("A infecção ganhou, boa tentativa!")
+        } else {
+            System.out.println("A infecção ganhou, boa tentativa!");
         }
     }
 
@@ -122,7 +118,7 @@ public class Jogo{
         }
         p.getSetorAtual().removerMortos(); //retira os inimigos que morreram do setor
     }
-}
+
 
     private void mover(Player p) {
 
@@ -175,7 +171,7 @@ public class Jogo{
     private void atacar(Player p) {
         Setor setor = p.getSetorAtual();
 
-        if (vivos.isEmpty()) {
+        if (setor.getInimigos().isEmpty()) {
             System.out.println("Não há inimigos vivos neste setor!");
             return;
         }
@@ -201,3 +197,48 @@ public class Jogo{
         }
     }
 
+    private void procurar(Player p) {
+        if (!p.getSetorAtual().podeProcurar()) {
+            System.out.println("O setor é privado.");
+            return;
+        }
+        p.procurarPlayer();
+        System.out.println(p.getNomePlayer() + " procurou no setor."); //falta dar feedback visual do que aconteceu?
+    }
+
+    private void suportar(PlayerSuporte suporte) {
+        System.out.println("1 - Recuperar a sua defesa");
+        System.out.println("2 - Recuperar a defesa do outro Player");
+        int opcao = Integer.parseInt(entrada.nextLine());
+        
+        //essa parte ficou meio confusa se o jeito de usar as funcoes ta certo
+        if (opcao == 1) {
+            suporte.suportar();
+        } else {
+            suporte.suportar(suporte.getSimples());
+        }
+    }
+    // inimigos atacam
+    private void turnoInimigos() {
+        for (Player p : players) {
+            if (!p.isVivo()) {
+                continue; 
+            }
+            for (Inimigo inimigo : p.getSetorAtual().getInimigos()) {
+                if (inimigo.isVivo() && p.isVivo()) {
+                    int defAntes = p.getDef();
+                    inimigo.atacar(p);
+                    //jeito de ver se o ataque aconteceu ou nao
+                    if (p.getDef() < defAntes) {
+                        System.out.println("Inimigo " + inimigo.getIdInimigo() + " acertou " + p.getNomePlayer());
+                    } else {
+                        System.out.println("Inimigo " + inimigo.getIdInimigo() + " errou " + p.getNomePlayer());
+                    }
+                }
+            }
+            if (!p.isVivo()) {
+                System.out.println(p.getNomePlayer() + " foi eliminado");
+            }
+        }
+    }
+}
