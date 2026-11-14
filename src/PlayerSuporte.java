@@ -16,8 +16,8 @@ public class PlayerSuporte extends Player{
             this.simples = simples;
         }
     }
-    public void suportar(Player playerUm){
-        if (playerUm.isVivo() && this.isVivo() && playerUm.setorAtual() == this.getSetorAtual()){
+    public void suportar(){
+        if (this.isVivo()){
             this.setDef(this.getDef() + 2);
         }
     }
