@@ -225,7 +225,7 @@ public class Jogo{
                 System.out.println("P1 foi curado: nova defesa é " + suporte.getSimples().getDef());
             }
             else{
-                System.out.println("P1 não está no mesmo setor que você!")
+                System.out.println("P1 não está no mesmo setor que você!");
             }
         }
     }
