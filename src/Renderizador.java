@@ -6,8 +6,15 @@ public class Renderizador {
     // Constantes auxiliares
     public static final int NORTE = 1, SUL = 2, LESTE = 3, OESTE = 4;
 
+    private boolean temPorta(Tabuleiro tabuleiro, int x, int y, int lado) {
+        if (x < 0 || x > 4 || y < 0 || y > 4)
+            return false;
+        Setor s = tabuleiro.getSetor(new Pos(x, y));
+        return s.getVisitado() && s.getPortas(lado);
+    }
+
     // Monta o tabuleiro em um vetor de strings
-    public String[] montarTabuleiro(Tabuleiro tabuleiro) {
+    public String[] montarTabuleiro(Tabuleiro tabuleiro, Player player1, PlayerSuporte player2) {
         String[] linhas = new String[12];
 
         // Adiciona um vazio as linhas para que seja possível somar strings
@@ -23,10 +30,10 @@ public class Renderizador {
 
                     Pos coord = new Pos(line, column); // Variável auxiliar
 
-                    // Adiciona o número da linha à esquerda do tabuleiro
                     if ((i == 0) && (line > 0))
                         continue;
 
+                    // Adiciona o número da linha à esquerda do tabuleiro
                     if (column == 0) {
                         if (i == 1)
                             linhas[(line + 1) * 2 + i - 1] += String.format("%d    |", line + 1);
@@ -40,7 +47,6 @@ public class Renderizador {
                     }
 
                     if (i == 1) {
-
                         // Confere se o setor é o central (escreve C) ou a fonte de infecção (escreve
                         // X).
                         // Se não for nenhum dos dois, adiciona um espaço vazio.
@@ -49,12 +55,19 @@ public class Renderizador {
                         else if ((tabuleiro.getFonteDeInfeccao().getX() == line)
                                 && (tabuleiro.getFonteDeInfeccao().getY() == column))
                             linhas[(line + 1) * 2 + i - 1] += " X ";
+                        else if ((player1.getSetorAtual() == player2.getSetorAtual())
+                                && (tabuleiro.getSetor(coord) == player1.getSetorAtual()))
+                            linhas[(line + 1) * 2 + i - 1] += " P ";
+                        else if (tabuleiro.getSetor(coord) == player1.getSetorAtual())
+                            linhas[(line + 1) * 2 + i - 1] += "P1 ";
+                        else if (tabuleiro.getSetor(coord) == player2.getSetorAtual())
+                            linhas[(line + 1) * 2 + i - 1] += "P2 ";
                         else
                             linhas[(line + 1) * 2 + i - 1] += "   ";
 
                         // Confere se o setor foi visitado e se tem porta no lado LESTE.
                         // Se as duas condições forem satisfeitas, desenha a porta.
-                        if ((tabuleiro.getSetor(coord).getVisitado()) && (tabuleiro.getSetor(coord).getPortas(LESTE)))
+                        if (temPorta(tabuleiro, line, column, LESTE) || temPorta(tabuleiro, line, column + 1, OESTE))
                             linhas[(line + 1) * 2 + i - 1] += "*";
                         else
                             linhas[(line + 1) * 2 + i - 1] += "|";
@@ -63,7 +76,7 @@ public class Renderizador {
 
                         // Confere se o setor foi visitado e se tem porta no lado SUL.
                         // Se as duas condições forem satisfeitas, desenha a porta.
-                        if ((tabuleiro.getSetor(coord).getVisitado()) && (tabuleiro.getSetor(coord).getPortas(SUL)))
+                        if (temPorta(tabuleiro, line, column, SUL) || temPorta(tabuleiro, line + 1, column, NORTE))
                             linhas[(line + 1) * 2 + i - 1] += "-*-|";
                         else
                             linhas[(line + 1) * 2 + i - 1] += "---|";
@@ -159,7 +172,7 @@ public class Renderizador {
 
     // Efetivamente desenha os tabuleiros e setores montados.
     public void renderizarTela(Tabuleiro tabuleiro, Player player1, PlayerSuporte player2) {
-        String[] tabMontado = montarTabuleiro(tabuleiro);
+        String[] tabMontado = montarTabuleiro(tabuleiro, player1, player2);
         String[] painel1 = null;
         String[] painel2 = null;
 
@@ -172,11 +185,18 @@ public class Renderizador {
         if ((player2.isVivo()) && (player2.getSetorAtual() != player1.getSetorAtual()))
             painel2 = montarSetor(player2.getSetorAtual(), player1, player2);
 
+        System.out.println("------------------------------");
+        System.out.println("|    Antivírus por um dia    |");
+        System.out.println("------------------------------");
+        System.out.println("");
+
         // Imprime o tabuleiro e setores lado a lado como indicado na descrição do
         // projeto.
         for (int i = 0; i < 12; i++) {
             if (i >= 2) {
-                if (((painel1 == painel2) && (painel1 != null)) || ((painel1 != null) && (painel2 == null))) {
+                if ((painel1 == null) && (painel2 == null))
+                    System.out.println(tabMontado[i]);
+                else if (((painel1 == painel2) && (painel1 != null)) || ((painel1 != null) && (painel2 == null))) {
                     System.out.println(tabMontado[i] + "   " + painel1[i - 2]);
                 } else if ((painel2 != null) && (painel1 == null)) {
                     System.out.println(tabMontado[i] + "   " + painel2[i - 2]);
