@@ -2,6 +2,7 @@ public class Tabuleiro {
     private Setor[][] matriz;
     private Pos fonteDeInfeccao;
     
+    //Define onde há portas no sentido leste e oeste
     private static  boolean[][] passagemHorizontal = {
         {true,  true,  true,  false},  
         {false, true,  true,  true},   
@@ -10,6 +11,7 @@ public class Tabuleiro {
         {true,  true,  false, true}    
     };
 
+    //Define onde há portas no sentido norte e sul
     private static boolean[][] passagemVertical = {
         {true,  false, true, false, true },   
         {false, false, true, true,  false},   
@@ -17,6 +19,9 @@ public class Tabuleiro {
         {true,  false, true, false, true }    
     };
 
+    //Cria a matriz do tabuleiro,
+    //define o setor da fonte da infecção
+    //e as configurações dos outros setores
     public Tabuleiro(){
         Dado dado = new Dado();
         
@@ -48,6 +53,7 @@ public class Tabuleiro {
         return this.fonteDeInfeccao;
     }
 
+    //Retorna o setor de acordo com a coordenada recebida
     public Setor getSetor (Pos coord){
         int x = coord.getX();
         int y = coord.getY();
@@ -57,6 +63,8 @@ public class Tabuleiro {
         return s;
     }
 
+    //Cria as portas de acordo com as matrizes vertical e horizontal
+    //e sorteia o tipo de setor
     private void criarSetores(){
         Dado dado = new Dado();
 

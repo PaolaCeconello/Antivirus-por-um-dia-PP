@@ -9,6 +9,8 @@ public class SetorOculto extends Setor {
         return true;
     }
 
+    //Rola um dado com dois numeros, ataca caso role 1 e 
+    // não ataca caso caia 2
     public boolean resolverAtaque(Player player, Inimigo inimigo) {
         Dado dado = new Dado();
         int valor = dado.rolar(1,2);
