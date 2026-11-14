@@ -72,6 +72,13 @@ public class Jogo{
                 fim = true;
             }
         }
+
+        // mostra como o jogo terminou
+        if (vencedor != null) {
+            System.out.println(vencedor.getNomePlayer() + " encontrou a fonte de infecção e venceu!");
+        } else if {
+            System.out.println("A infecção ganhou, boa tentativa!")
+        }
     }
 
     private void turnoPlayer(Player p){
@@ -164,3 +171,33 @@ public class Jogo{
             fim = true;
         }
     }
+
+    private void atacar(Player p) {
+        Setor setor = p.getSetorAtual();
+
+        if (vivos.isEmpty()) {
+            System.out.println("Não há inimigos vivos neste setor!");
+            return;
+        }
+
+        System.out.println("Qual inimigo atacar?");
+        for (int i = 0; i < vivos.size(); i++) {
+            Inimigo inimigo = vivos.get(i);
+            System.out.println((i + 1) + ": Inimigo " + inimigo.getIdInimigo()
+                    + " (" + inimigo.getAtk() + "/" + inimigo.getDef() + ")");
+        }
+        int opcao = Integer.parseInt(entrada.nextLine());
+        Inimigo alvo = vivos.get(opcao - 1);
+
+        //resultados do ataque
+        boolean acertou = setor.resolverAtaque(p, alvo);
+        if (!acertou) {
+            System.out.println("O ataque não acertou o vírus");
+        } else if (!alvo.isVivo()) {
+            System.out.println("Inimigo " + alvo.getIdInimigo() + " eliminado!");
+        } else {
+            System.out.println("Inimigo " + alvo.getIdInimigo() + " ficou com "
+                    + alvo.getAtk() + "/" + alvo.getDef());
+        }
+    }
+
