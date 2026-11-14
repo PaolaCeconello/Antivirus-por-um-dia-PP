@@ -17,7 +17,7 @@ public class Inimigo extends Personagem{
         this.idInimigo = idInimigo;
     }
 
-    // outros metodos 
+    // implementacao do Atacar
     @Override
     public void atacar(Personagem alvo){
         Dado dado = new Dado();

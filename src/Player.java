@@ -21,12 +21,14 @@ public class Player extends Personagem{
         this.nomePlayer = nomePlayer;
     }
 
-    // outros metodos 
+    // outros metodos
+    // implementacao do metodo atacar 
     @Override
     public void atacar(Personagem alvo){
         alvo.setDef(alvo.getDef() - this.getAtk());
     }
 
+    // faz o player procurar
     public int procurarPlayer(){
 
         // verifica se pode pode procurar e se o setor ja foi definido
@@ -34,9 +36,11 @@ public class Player extends Personagem{
             return 0;
         }
 
+        // joga o dado
         Dado dado = new Dado();
         int valor = dado.rolar(1,6);
 
+        // acao depende do valor resultado do dado
         if (valor == 4){
             this.setDef(this.getDef() + 1);
         } else if (valor == 5) {
@@ -50,6 +54,7 @@ public class Player extends Personagem{
         return valor;
     }
 
+    // movimenta para outro setor
     public void movimentarPlayer(Setor setor){
         if (this.getSetorAtual() == null || setor == null){
             return;

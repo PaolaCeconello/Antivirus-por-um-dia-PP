@@ -19,13 +19,14 @@ public class PlayerSuporte extends Player{
         }
     }
 
-    // outros metodos
+    // player suporta a si mesmo
     public void suportar(){
         if (this.isVivo()){
             this.setDef(this.getDef() + 2);
         }
     }
 
+    // player suporta o outro player
     public int suportar(Player playerUm){
         if (playerUm.isVivo() && this.isVivo() && playerUm.getSetorAtual() == this.getSetorAtual()){
             playerUm.setDef(playerUm.getDef() + 2);

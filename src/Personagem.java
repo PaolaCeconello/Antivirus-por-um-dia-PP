@@ -15,8 +15,18 @@ public abstract class Personagem implements Atacante{
         return this.atk;
     }
 
+    public void setAtk(int atk){
+        if (atk >= 0){
+            this.atk = atk;
+        }
+    }
+
     public int getDef(){
         return this.def;
+    }
+
+    public void setDef(int def){
+        this.def = def;
     }
 
     public Setor getSetorAtual(){
@@ -31,13 +41,4 @@ public abstract class Personagem implements Atacante{
         return (this.def > 0);
     }
 
-    public void setAtk(int atk){
-        if (atk >= 0){
-            this.atk = atk;
-
-        }
-    }
-    public void setDef(int def){
-        this.def = def;
-    }
 }
