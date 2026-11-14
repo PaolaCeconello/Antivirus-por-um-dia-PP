@@ -20,15 +20,21 @@ public class PlayerSuporte extends Player{
     }
 
     // outros metodos
-    public void suportar(){
+    public int suportar(){
         if (this.isVivo()){
             this.setDef(this.getDef() + 2);
+            return 1;
         }
+        
+        return 0;
     }
 
-    public void suportar(Player playerUm){
+    public int suportar(Player playerUm){
         if (playerUm.isVivo() && this.isVivo() && playerUm.getSetorAtual() == this.getSetorAtual()){
             playerUm.setDef(playerUm.getDef() + 2);
+            return 1;
         }
+
+        return 0;
     }
 }
