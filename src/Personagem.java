@@ -1,5 +1,3 @@
-// comentar depois
-
 public abstract class Personagem implements Atacante{
     // atributos 
     protected int atk; 
