@@ -66,6 +66,15 @@ public boolean temInimigosVivos(){
     return false;
 }
 
+public void removerMortos(){
+    for (int i = inimigosNoSetor.size() - 1; i >= 0; i--){
+        Inimigo inimigo = inimigosNoSetor.get(i);
+        if (inimigo.isVivo() == false){
+            inimigosNoSetor.remove(i);
+        }
+    }
+}
+
 public abstract boolean podeProcurar();
 public abstract boolean resolverAtaque(Player player, Inimigo inimigo);
 

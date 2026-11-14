@@ -44,7 +44,7 @@ public class Player extends Personagem{
     }
 
     public void movimentarPlayer(Setor setor){
-        if (setorAtual == null){
+        if (setorAtual == null || setor == null){
             return;
         }
         
@@ -53,5 +53,6 @@ public class Player extends Personagem{
         }
 
         this.setSetorAtual(setor);
+        setor.visitar();
     }
 }
