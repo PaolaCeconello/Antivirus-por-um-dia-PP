@@ -34,9 +34,7 @@ public class Jogo{
         this.players.add(p2);
 
         // coloca os herois no centro do tabuleiro
-        Pos centro = new Pos();
-        centro.setX(2);
-        centro.setY(2);
+        Pos centro = new Pos(2,2);
         Setor setorCentral = tabuleiro.getSetor(centro);
         setorCentral.setVisitado(); // para o setor central não gerar inimigos
         p1.setSetorAtual(setorCentral);
@@ -155,9 +153,7 @@ public class Jogo{
         }
 
         // movimenta em si o player
-        Pos destino = new Pos();
-        destino.setX(x);
-        destino.setY(y);
+        Pos destino = new Pos(x,y);
         p.movimentarPlayer(tabuleiro.getSetor(destino));
 
         //verifica se chegou no fim
@@ -170,8 +166,9 @@ public class Jogo{
 
     private void atacar(Player p) {
         Setor setor = p.getSetorAtual();
+        List<Inimigo> vivos = setor.getInimigos();
 
-        if (setor.getInimigos().isEmpty()) {
+        if (vivos.isEmpty()) {
             System.out.println("Não há inimigos vivos neste setor!");
             return;
         }
