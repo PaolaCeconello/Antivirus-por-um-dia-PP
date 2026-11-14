@@ -75,7 +75,7 @@ public class Jogo{
 
     private void turnoPlayer(Player p){
         this.renderizador.renderizarTela(tabuleiro, players.get(0), (PlayerSuporte) players.get(1));
-        
+        System.out.println("TURNO DO " + p.getNomePlayer());
         if(!p.getSetorAtual().temInimigosVivos()){
             mover(p);
             if(fim){
@@ -95,11 +95,13 @@ public class Jogo{
         System.out.println("Escolha uma ação:");
         System.out.println("1 - Atacar");
         System.out.println("2 - Procurar");
+        int max = 2;
         if (p instanceof PlayerSuporte) { 
             System.out.println("3 - Recuperar defesa");
+            max = 3;
         }
 
-        int opcao = Integer.parseInt(entrada.nextLine());
+        int opcao = lerOpcao(1, max);
 
         switch(opcao) {
             case 1: 
@@ -123,7 +125,7 @@ public class Jogo{
         Setor atual = p.getSetorAtual();
         System.out.println("Escolha uma opção para se mover:");
         System.out.println("0 - Ficar | 1 - Norte | 2 - Sul | 3 - Leste | 4 - Oeste");
-        int opcao = Integer.parseInt(entrada.nextLine());
+        int opcao = lerOpcao(0, 4);
         System.out.println("------------------------------------------------------------------");
         if (opcao == 0) {
             return;
@@ -131,7 +133,7 @@ public class Jogo{
 
         int x = atual.getCoord().getX();   
         int y = atual.getCoord().getY();   
-        int porta = opcao;             // 0=Norte, 1=Sul, 2=Leste, 3=Oeste ? ta certo isso ?
+        int porta = opcao; 
 
         if (!atual.getPortas(porta)) {
             System.out.println("Ali é uma parede");
@@ -175,7 +177,7 @@ public class Jogo{
             System.out.println((i + 1) + ": Inimigo " + inimigo.getIdInimigo()
                     + " (" + inimigo.getAtk() + "/" + inimigo.getDef() + ")");
         }
-        int opcao = Integer.parseInt(entrada.nextLine());
+        int opcao = lerOpcao(1,vivos.size());
         Inimigo alvo = vivos.get(opcao - 1);
 
         //resultados do ataque
@@ -195,22 +197,39 @@ public class Jogo{
             System.out.println("O setor é privado");
             return;
         }
-        p.procurarPlayer();
-        System.out.println(p.getNomePlayer() + " procurou no setor"); //falta dar feedback visual do que aconteceu?
+        int resultado = p.procurarPlayer();
+        if (resultado == 4){
+            System.out.println(p.getNomePlayer() + " aumentou sua defesa em 1");
+        } else if (resultado == 5) {
+            System.out.println(p.getNomePlayer() + " aumentou sua defesa em 2");
+        } else if (resultado == 6){
+            System.out.println(p.getNomePlayer() + " diminuiu a defesa de todos os inimigos do setor");
+        }  
+        else{
+            System.out.println(p.getNomePlayer() + " nao encontrou nada");
+        }
     }
 
     private void suportar(PlayerSuporte suporte) {
         System.out.println("1 - Recuperar a sua defesa");
         System.out.println("2 - Recuperar a defesa do outro Player");
-        int opcao = Integer.parseInt(entrada.nextLine());
+        int opcao = lerOpcao(1,2);
         
         //essa parte ficou meio confusa se o jeito de usar as funcoes ta certo
         if (opcao == 1) {
             suporte.suportar();
+            System.out.println("P2 se curou: nova defesa é " + suporte.getDef());
         } else {
-            suporte.suportar(suporte.getSimples());
+            int sucesso = suporte.suportar(suporte.getSimples());
+            if(sucesso == 1){
+                System.out.println("P1 foi curado: nova defesa é " + suporte.getSimples().getDef());
+            }
+            else{
+                System.out.println("P1 não está no mesmo setor que você!")
+            }
         }
     }
+    
     // inimigos atacam
     private void turnoInimigos() {
         System.out.println("TURNO DOS INIMIGOS:");
@@ -235,5 +254,14 @@ public class Jogo{
             }
         }
     System.out.println("------------------------------------------------------------------");       
+    }
+
+    private int lerOpcao(int min, int max){
+        while(true){
+            int opcao = Integer.parseInt(entrada.nextLine());
+            if (opcao >= min && opcao <= max) 
+                return opcao;
+            System.out.println("Opção inválida!");
+        }
     }
 }
