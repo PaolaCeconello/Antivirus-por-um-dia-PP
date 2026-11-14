@@ -23,10 +23,8 @@ public class PlayerSuporte extends Player{
     }
 
     public void suportar(Player playerUm){
-        // VERIFICAR SE ESTÁ NO MESMO SETOR AQUI
-        // como n tem setor ainda nao consigo fazer isso
-        if (playerUm.isVivo() && this.isVivo()){
+        if (playerUm.isVivo() && this.isVivo() && playerUm.getSetorAtual() == this.getSetorAtual()){
             playerUm.setDef(playerUm.getDef() + 2);
-        }       
+        }
     }
 }
