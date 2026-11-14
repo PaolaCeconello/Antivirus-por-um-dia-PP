@@ -88,9 +88,11 @@ public class Jogo{
         for (int i = 1; i <= 2; i++) { //executa as duas ações
             executarAcao(p);
         }
+        System.out.println("------------------------------------------------------------------");
     }
 
     private void executarAcao(Player p){
+        System.out.println("Escolha uma ação:");
         System.out.println("1 - Atacar");
         System.out.println("2 - Procurar");
         if (p instanceof PlayerSuporte) { 
@@ -119,8 +121,10 @@ public class Jogo{
     private void mover(Player p) {
 
         Setor atual = p.getSetorAtual();
+        System.out.println("Escolha uma opção para se mover:");
         System.out.println("0 - Ficar | 1 - Norte | 2 - Sul | 3 - Leste | 4 - Oeste");
         int opcao = Integer.parseInt(entrada.nextLine());
+        System.out.println("------------------------------------------------------------------");
         if (opcao == 0) {
             return;
         }
@@ -188,11 +192,11 @@ public class Jogo{
 
     private void procurar(Player p) {
         if (!p.getSetorAtual().podeProcurar()) {
-            System.out.println("O setor é privado.");
+            System.out.println("O setor é privado");
             return;
         }
         p.procurarPlayer();
-        System.out.println(p.getNomePlayer() + " procurou no setor."); //falta dar feedback visual do que aconteceu?
+        System.out.println(p.getNomePlayer() + " procurou no setor"); //falta dar feedback visual do que aconteceu?
     }
 
     private void suportar(PlayerSuporte suporte) {
@@ -209,6 +213,7 @@ public class Jogo{
     }
     // inimigos atacam
     private void turnoInimigos() {
+        System.out.println("TURNO DOS INIMIGOS:");
         for (Player p : players) {
             if (!p.isVivo()) {
                 continue; 
@@ -229,5 +234,6 @@ public class Jogo{
                 System.out.println(p.getNomePlayer() + " foi eliminado");
             }
         }
+    System.out.println("------------------------------------------------------------------");       
     }
 }
