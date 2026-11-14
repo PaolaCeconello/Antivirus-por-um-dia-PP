@@ -1,8 +1,20 @@
-import java.util.List;
-
 public class Tabuleiro {
     private Setor[][] matriz;
     private Pos fonteDeInfeccao;
+    private static  boolean[][] passagemHorizontal = {
+        {true,  true,  true,  false},  
+        {false, true,  true,  true},   
+        {true,  true,  true,  true},   
+        {true,  false, true,  true},   
+        {true,  true,  false, true}    
+    };
+
+    private static boolean[][] passagemVertical = {
+        {true,  false, true, false, true },   
+        {false, false, true, true,  false},   
+        {false, true,  true, false, false},   
+        {true,  false, true, false, true }    
+    };
 
     public Tabuleiro(){
         Dado dado = new Dado();
@@ -50,11 +62,12 @@ public class Tabuleiro {
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){
                 boolean[] portas = new boolean[5];
-                portas[1] = (i > 0);
-                portas[2] = (i < 4);
-                portas[3] = (j < 4);
-                portas[4] = (j > 0);
+                portas[1] = (i > 0) && passagemVertical[i - 1][j];     
+                portas[2] = (i < 4) && passagemVertical[i][j];         
+                portas[3] = (j < 4) && passagemHorizontal[i][j];   
+                portas[4] = (j > 0) && passagemHorizontal[i][j - 1];       
                 Pos coord = new Pos(i, j);
+
 
                 int tipo = dado.rolar(1, 3);
 
