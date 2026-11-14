@@ -27,11 +27,11 @@ public class Player extends Personagem{
         alvo.setDef(alvo.getDef() - this.getAtk());
     }
 
-    public void procurarPlayer(){
+    public int procurarPlayer(){
 
         // verifica se pode pode procurar e se o setor ja foi definido
-        if (this.setorAtual == null || !this.setorAtual.podeProcurar()){
-            return;
+        if (this.getSetorAtual() == null || !this.setorAtual.podeProcurar()){
+            return 0;
         }
 
         Dado dado = new Dado();
@@ -42,18 +42,20 @@ public class Player extends Personagem{
         } else if (valor == 5) {
             this.setDef(this.getDef() + 2);
         } else if (valor == 6){
-            for (Inimigo inimigo : this.setorAtual.getInimigos()){
+            for (Inimigo inimigo : this.getSetorAtual().getInimigos()){
                 inimigo.setDef(inimigo.getDef() - 1);
             }
         }
+
+        return valor;
     }
 
     public void movimentarPlayer(Setor setor){
-        if (setorAtual == null || setor == null){
+        if (this.getSetorAtual() == null || setor == null){
             return;
         }
         
-        if (this.setorAtual.temInimigosVivos()){
+        if (this.getSetorAtual().temInimigosVivos()){
             return;
         }
 
