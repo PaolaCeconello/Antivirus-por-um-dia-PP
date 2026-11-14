@@ -1,11 +1,14 @@
 public class Inimigo extends Personagem{
+    // atributos 
     private int idInimigo;
 
+    // construtor
     public Inimigo(int valor, int idInimigo){
         super(valor, valor); // quem vai aleatorizar o valor e quem chama
         this.setIdInimigo(idInimigo);
     }
 
+    // gets e sets
     public int getIdInimigo(){
         return this.idInimigo;
     }
@@ -14,6 +17,7 @@ public class Inimigo extends Personagem{
         this.idInimigo = idInimigo;
     }
 
+    // outros metodos 
     @Override
     public void atacar(Personagem alvo){
         Dado dado = new Dado();

@@ -1,16 +1,18 @@
 // comentar depois
 
 public abstract class Personagem implements Atacante{
+    // atributos 
     protected int atk; 
     protected int def;
     protected Setor setorAtual;
 
-    // obs: colocar o Setor aqui dps
+    // construtor
     public Personagem(int atk, int def) {
         this.setAtk(atk);
         this.setDef(def);
     }
 
+    // gets e sets
     public int getAtk(){
         return this.atk;
     }
@@ -37,7 +39,6 @@ public abstract class Personagem implements Atacante{
 
         }
     }
-
     public void setDef(int def){
         this.def = def;
     }

@@ -1,6 +1,8 @@
 public class Player extends Personagem{
+    // atributos 
     private String nomePlayer;
 
+    // construtores
     public Player(String nomePlayer, int atk, int def){
         super(atk, def);
         this.setNomePlayer(nomePlayer);
@@ -10,6 +12,7 @@ public class Player extends Personagem{
         this(nomePlayer, 2, 6);
     }
 
+    // gets e sets
     public String getNomePlayer(){
         return this.nomePlayer;
     }
@@ -18,6 +21,7 @@ public class Player extends Personagem{
         this.nomePlayer = nomePlayer;
     }
 
+    // outros metodos 
     @Override
     public void atacar(Personagem alvo){
         alvo.setDef(alvo.getDef() - this.getAtk());
@@ -25,6 +29,7 @@ public class Player extends Personagem{
 
     public void procurarPlayer(){
 
+        // verifica se pode pode procurar e se o setor ja foi definido
         if (this.setorAtual == null || !this.setorAtual.podeProcurar()){
             return;
         }

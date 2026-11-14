@@ -1,12 +1,14 @@
 public class PlayerSuporte extends Player{
-
+    // atributos 
     private Player simples;
 
+    // construtores
     public PlayerSuporte(String nomePlayer, Player simples){
         super(nomePlayer, 1, 7);
         this.setSimples(simples);
     }
 
+    // gets e sets
     public Player getSimples(){
         return this.simples;
     }
@@ -16,6 +18,8 @@ public class PlayerSuporte extends Player{
             this.simples = simples;
         }
     }
+
+    // outros metodos
     public void suportar(){
         if (this.isVivo()){
             this.setDef(this.getDef() + 2);
